@@ -1,6 +1,3 @@
-//
-// Getting an AMI ImagIds
-//
 
 // load AWS SDK
 const AWS = require('aws-sdk');
