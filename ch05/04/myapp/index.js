@@ -11,5 +11,5 @@ const server =  http.createServer( function( request, response ) {
 server.listen( port, function() {
     var addr = server.address();
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    console.debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 });
