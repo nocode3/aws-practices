@@ -1,6 +1,6 @@
 // EC2 인스턴스 정보
 var AWS = require('aws-sdk');
-AWS.config.loadFromPath('./config.json');
+//AWS.config.loadFromPath('./config.json');
 
 ec2 = new AWS.EC2({
     region: 'ap-northeast-2',

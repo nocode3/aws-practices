@@ -5,17 +5,104 @@
         "KeyName": {
             "Description": "the Key Pair for accessing to EC2 instance",
             "Type": "String",
-            "Default": "mykey"
-        }
+            "Default": "mykey2"
+        },
+        "VPC": {
+			"Description": "Just select the one and only default VPC",
+			"Type": "AWS::EC2::VPC::Id",
+            "Default": "vpc-27cb4b4c"
+		}     
     },
     "Resources": {
+        "CfnUser": {
+            "Type": "AWS::IAM::User",
+            "Properties": {
+              "Path": "/",
+              "Policies": [
+                {
+                  "PolicyName": "root",
+                  "PolicyDocument": {
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": "cloudformation:DescribeStackResource",
+                        "Resource": "*"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+      
+      
+          "HostKeys": {
+            "Type": "AWS::IAM::AccessKey",
+            "Properties": {
+              "UserName": {
+                "Ref": "CfnUser"
+              }
+            }
+          },
+ 
+		"SecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "My security group",
+                "GroupName": "MySecurityGroup2",
+				"VpcId": {"Ref": "VPC"},
+				"SecurityGroupIngress": [{
+					"CidrIp": "0.0.0.0/0",
+					"FromPort": 22,
+					"IpProtocol": "tcp",
+					"ToPort": 22
+				}]
+			}
+		},        
         "MyServer": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
                 "ImageId": "ami-07464b2b9929898f8",
                 "InstanceType": "t2.micro",
+                "SecurityGroupIds" : [ 
+                    { "Fn::GetAtt" : [ "SecurityGroup", "GroupId" ] }
+                ],
                 "KeyName": {
                     "Ref": "KeyName"
+                },
+                "UserData": {
+                    "Fn::Base64": {
+                      "Fn::Join": [ "",[
+                        "#!/bin/bash -v\n",
+                        "yum update -y aws-cfn-bootstrap\n",
+          
+                        "# Install Node.js from Official RPM\n",
+                        "# @see https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager\n",
+                        "yum localinstall -y --nogpgcheck http://nodejs.tchol.org/repocfg/amzn1/nodejs-stable-release.noarch.rpm || error_exit 'Failed to install Node.js'\n",
+          
+          
+                        "# Install Git and Node.js\n",
+                        "/opt/aws/bin/cfn-init -s ", { "Ref": "AWS::StackName" }, " -r MyServer ",
+                        "    --access-key ", { "Ref": "HostKeys" },
+                        "    --secret-key ", { "Fn::GetAtt": ["HostKeys", "SecretAccessKey"] },
+                        "    --region ", { "Ref": "AWS::Region" }
+          
+                    ]]
+                    }
+                  }               
+            },
+          
+            "Metadata" : {
+                "AWS::CloudFormation::Init" : {
+                  "config" : {
+                    "packages" : {
+                      "yum": {
+                        "git" : [],
+                        "nodejs-compat-symlinks" : [],
+                        "npm" : []
+                      }
+                    }
+                  }
                 }
             }
         }
