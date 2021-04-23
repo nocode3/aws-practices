@@ -5,31 +5,25 @@
 // load AWS SDK
 const AWS = require('aws-sdk');
 
-// set the region to Oregon
-AWS.config.update({region:'ap-northeast-2'});
+// set the region to Seoul
+// AWS.config.update({region:'ap-northeast-2'});
 
 // create EC2 service object
-const ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
+const ec2 = new AWS.EC2({
+  region: 'ap-northeast-2',
+  apiVersion: '2016-11-15'
+});
 
 // get the current Amazon Linux 2 AMIs
 const params = {
-  Filters: [
-    {
+  Filters: [{
       Name: 'name',
-      Values: [
-        'amzn2-ami-hvm-2.0.????????-x86_64-gp2'
-      ]
-    },
-    {
+      Values: [ 'amzn2-ami-hvm-2.0.????????-x86_64-gp2']
+  },{
       Name: 'state',
-      Values: [
-        'available'
-      ]
-    },
-  ],
-  Owners: [
-    'amazon',
-  ]  
+      Values: ['available']
+  }],
+  Owners: ['amazon']  
  };
 
 ec2.describeImages(params, function(err, data) {
