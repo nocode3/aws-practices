@@ -8,13 +8,16 @@ Write-Host '[3] Get the default subnet ID...'
 $SUBNETID=aws ec2 describe-subnets --query "(Subnets[?VpcId=='$VPCID'].SubnetId)[0]" --output text
 
 Write-Host '[4] Create a security group...'
-$SGID=aws ec2 create-security-group --group-name mysecuritygroup --description "My Security Group" --vpc-id vpc-27cb4b4c --output text
+$SGNAME='mysecuritygroup'
+$SGID=aws ec2 create-security-group --group-name $SGNAME --description "My Security Group" --vpc-id $VPCID --output text
 
 Write-Host '[5] Allow inbound SSH connections...'
 aws ec2 authorize-security-group-ingress --group-id $SGID --protocol tcp --port 22 --cidr 0.0.0.0/0
 
 Write-Host '[6] Create and start the server...'
-$INSTANCEID=aws ec2 run-instances --image-id $AMIID --instance-type t2.micro --security-group-ids $SGID --subnet-id $SUBNETID --key-name mykey --query "Instances[0].InstanceId" --output text
+INSTANCETYPE='t2.micro'
+KEYNAME='mykey'
+$INSTANCEID=aws ec2 run-instances --image-id $AMIID --instance-type $INSTANCETYPE --security-group-ids $SGID --subnet-id $SUBNETID --key-name $KEYNAME --query "Instances[0].InstanceId" --output text
 
 Write-Host "waiting for $INSTANCEID..."
 aws ec2 wait instance-running --instance-ids $INSTANCEID
