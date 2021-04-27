@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mainRouter = require('./routes/main');
 
-const port = 9090;
+const port = 8080;
 const app = express();
 
 // parsing request body (application/x-www-form-urlencoded)
