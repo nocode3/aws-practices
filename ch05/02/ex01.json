@@ -1,0 +1,48 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "create an RDS instance of MySQL Engine",
+	"Parameters": {
+		"VPC": {
+			"Description": "Just select the one and only default VPC",
+			"Type": "AWS::EC2::VPC::Id",
+            "Default": "vpc-27cb4b4c"
+		}		       
+	},
+	"Resources": {
+		"DatabaseSecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "myapp-db-sg",
+				"VpcId": {"Ref": "VPC"},
+				"SecurityGroupIngress": [{
+					"CidrIp": "0.0.0.0/0",
+					"IpProtocol": "tcp",
+					"FromPort": "3306",
+					"ToPort": "3306"
+				}]
+			}
+		},		 		
+		"Database": {
+			"Type": "AWS::RDS::DBInstance",
+			"DeletionPolicy": "Delete",
+			"Properties": {
+				"AllocatedStorage": "5",
+				"DBInstanceClass": "db.t2.micro",
+				"DBInstanceIdentifier": "myapp-db",
+				"DBName": "myapp",
+				"Engine": "MySQL",
+				"MasterUsername": "myapp",
+				"MasterUserPassword": "myapp",
+				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
+			}
+		}
+	},
+	"Outputs": {
+		"InstanceId": {
+			"Description": "the instance's id of RDS instance created newly",
+			"Value": {
+				"Ref": "Database"
+			}
+		}
+	}
+}
