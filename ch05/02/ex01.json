@@ -32,7 +32,7 @@
 				"DBName": "myapp",
 				"Engine": "MySQL",
 				"MasterUsername": "myapp",
-				"MasterUserPassword": "myapp",
+				"MasterUserPassword": "myapp1234",
 				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
 			}
 		}
