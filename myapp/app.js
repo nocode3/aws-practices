@@ -2,7 +2,7 @@ const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
-const mainRouter = require('./routes/main');
+const router = require('./routes/route');
 
 const port = 8080;
 const app = express();
@@ -23,7 +23,7 @@ app.all('*', function (req, res, next) {
     res.locals.res = res;
     next();
 });
-app.use('/', mainRouter);
+app.use('/', router);
 
 // server start up`
 let server = http.createServer(app);

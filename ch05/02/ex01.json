@@ -38,8 +38,8 @@
 		}
 	},
 	"Outputs": {
-		"InstanceId": {
-			"Description": "the instance's id of RDS instance created newly",
+		"Endpoint": {
+			"Description": "the Endpoint of RDS instance created newly",
 			"Value": {
 				"Ref": "Database"
 			}
