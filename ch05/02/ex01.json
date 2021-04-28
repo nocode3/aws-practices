@@ -41,7 +41,7 @@
 		"Endpoint": {
 			"Description": "the Endpoint of RDS instance created newly",
 			"Value": {
-				"Fn::GetAtt": ["Database", "Endpoint"]
+				"Fn::GetAtt": ["Database", "Endpoint.Address"]
 			}
 		}
 	}
