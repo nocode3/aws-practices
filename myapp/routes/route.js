@@ -1,14 +1,13 @@
 const express = require('express');
-
 const router = express.Router();
 
-router.route('/').get(function(req, res, next){
+router.get('/', function(req, res){
     res.render('main/index', null);
 });
 
-router.route('/upload').post(function(req, res, next){
-    console.log(req.body);
-    console.log('파일 업로드!!!');
+router.post('/upload', function(req, res){
+    console.log(req.file);
+    console.log(req.body.comment);
     res.redirect('/');
 });
 

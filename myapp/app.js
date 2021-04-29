@@ -1,61 +1,55 @@
-const http = require('http');
+const fs = require('fs');
 const path = require('path');
-const bodyParser = require('body-parser');
+const http = require('http');
 const express = require('express');
+const multer = require('multer');
+
 const router = require('./routes/route');
+const config = require('./config')
 
-const port = 8080;
-const app = express();
+// application set-up
+const application = express()
+    // multipart
+    .use(multer({ dest: config.uploadTemp }).single('photo'))
+    // view engine
+    .set('views', path.join(__dirname, 'views'))
+    .set('view engine', 'ejs')
+    // static
+    .use(express.static(path.join(__dirname, 'public')))
+    // request router
+    .all('*', function (req, res, next) {
+        res.locals.req = req;
+        res.locals.res = res;
+        next();
+    })
+    .use('/', router);
 
-// parsing request body (application/x-www-form-urlencoded)
-app.use(bodyParser.urlencoded({extended: false}));
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// request router setup
-app.all('*', function (req, res, next) {
-    res.locals.req = req;
-    res.locals.res = res;
-    next();
-});
-app.use('/', router);
-
-// server start up`
-let server = http.createServer(app);
-server.on('error', onError);
-server.on('listening', onListening);
-server.listen(port);
-
-// error handler
-function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-
-    var bind = ( typeof port === 'string' ) ? 'Pipe ' + port : 'Port ' + port;
-
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
+// server start-up
+http.createServer(application)
+    .on('listening', function(){
+        const addr = this.address();
+        const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+        console.log('Listening on ' + bind);
+    })
+    .on('error', function(error) {
+        if (error.syscall !== 'listen') {
             throw error;
-    }
-}
+        }
 
-function onListening() {
-    var addr = server.address();
-    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    console.log('Listening on ' + bind);
-}
+        const bind = ( typeof config.port === 'string' ) ? 'Pipe ' + config.port : 'Port ' + config.port;
+
+        // handle specific listen errors
+        switch(error.code) {
+            case 'EACCES':
+                console.error(bind + ' requires elevated privileges');
+                process.exit(1);
+                break;
+            case 'EADDRINUSE':
+                console.error(bind + ' is already in use');
+                process.exit(1);
+                break;
+            default:
+                throw error;
+        }
+    })
+    .listen(config.port);
