@@ -73,7 +73,13 @@
 					},
 					"sources": {
 						"/myapp": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/myapp/app.js"
-					}
+					},
+					"commands": {
+						"01_install": {
+							"command": "git clone https://github.com/kickscar/aws-practices.git",
+							"cwd": "/"
+						}
+					}					
 				}
 			}
 		}
