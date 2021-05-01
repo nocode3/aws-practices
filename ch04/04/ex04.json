@@ -54,27 +54,26 @@
 				"UserData": {
 					"Fn::Base64": {
 						"Fn::Join": [ "", [
-							"/opt/aws/bin/cfn-init --region ", {"Ref": "AWS::Region"},
-							" -s ", {"Ref": "AWS::StackName"},
-							" -r EC2Instance\n" 	
+							"#!/bin/bash -ex\n",
+							"/opt/aws/bin/cfn-init -v -r EC2Instance --stack ", {"Ref": "AWS::StackName"}, " --region ", {"Ref": "AWS::Region"}, "\n"
 						]]
 					}
 				}
 			},
-			"Metadata" : {
+			"Metadata": {
 				"AWS::CloudFormation::Init" : {
-					"config" : {
-						"packages" : {
-							"yum" : {
+					"config": {
+						"packages": {
+							"yum": {
 								"httpd" : []
 					  		}
 						}
 					},
-					"services" : {
-					  	"sysvinit" : {
-							"httpd" : {
-						  		"enabled" : "true",
-						  		"ensureRunning" : "true"
+					"services": {
+					  	"sysvinit": {
+							"httpd": {
+						  		"enabled": "true",
+						  		"ensureRunning": "true"
 							}
 					  	}
 					}
