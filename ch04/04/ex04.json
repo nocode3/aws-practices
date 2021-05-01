@@ -55,6 +55,7 @@
 					"Fn::Base64": {
 						"Fn::Join": [ "", [
 							"#!/bin/bash -ex\n",
+							"curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -\n",
 							"/opt/aws/bin/cfn-init -v -r EC2Instance --stack ", {"Ref": "AWS::StackName"}, " --region ", {"Ref": "AWS::Region"}, "\n"
 						]]
 					}
@@ -65,17 +66,10 @@
 					"config": {
 						"packages": {
 							"yum": {
-								"httpd" : []
+								"git": [],
+								"nodejs" : []
 					  		}
 						}
-					},
-					"services": {
-					  	"sysvinit": {
-							"httpd": {
-						  		"enabled": "true",
-						  		"ensureRunning": "true"
-							}
-					  	}
 					}
 				}
 			}
