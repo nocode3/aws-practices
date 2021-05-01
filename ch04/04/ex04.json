@@ -70,6 +70,9 @@
 								"nodejs" : []
 					  		}
 						}
+					},
+					"sources": {
+						"/myapp": ""
 					}
 				}
 			}
