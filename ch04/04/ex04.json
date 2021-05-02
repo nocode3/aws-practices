@@ -38,8 +38,51 @@
 				}]
 			}
 		}, 		
-		"EC2Instance": {
+		"WebServerInstance": {
 			"Type": "AWS::EC2::Instance",
+			"Metadata": {
+				"AWS::CloudFormation::Init": {
+					"configSets": {
+						"Install": ["Install"]
+					},					
+					"Install": {
+						"packages": {
+							"yum": {
+								"httpd": [],
+								"git": [],
+								"nodejs" : []
+					  		}
+						},
+						"sources": {
+							"/var/www/html": "https://wordpress.org/wordpress-4.2.4.tar.gz"
+						},
+						"files": {
+							"/tmp/config": {
+								"content": {"Fn::Join": ["", [
+									"#!/bin/bash -ex\n",
+									"cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php\n",
+									"sed -i \"s/'database_name_here'/'wordpress'/g\" wp-config.php\n",
+									"sed -i \"s/'username_here'/'wordpress'/g\" wp-config.php\n",
+									"sed -i \"s/'password_here'/'wordpress'/g\" wp-config.php\n",
+									"chmod -R 777 wp-content/ \n",
+									"echo  'hello' > test.txt\n"
+								]]},
+								"mode": "000500",
+								"owner": "root",
+								"group": "root"
+							}
+						}												
+					}
+				},
+				"services": {
+					"sysvinit": {
+						"httpd": {
+							"enabled": "true",
+							"ensureRunning": "true"
+						}
+					}
+				}
+			},			
 			"Properties": {
 				"ImageId": "ami-07464b2b9929898f8",
 				"InstanceType": {
@@ -57,54 +100,13 @@
 							"#!/bin/bash -ex\n",
 							"yum install -y aws-cfn-bootstrap\n",
 							"curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -\n",
-							"/opt/aws/bin/cfn-init -v", 
-							" --resource EC2Instance",
+							"/opt/aws/bin/cfn-init -v ", 
 							" --stack ", {"Ref": "AWS::StackName"},
+							" --resource WebServerInstance ",
 							" --configsets Install ",							
 							" --region ", {"Ref": "AWS::Region"}, "\n"
 						]]
 					}	
-				}
-			},
-			"Metadata": {
-				"AWS::CloudFormation::Init": {
-					"configSets" : {
-						"Install" : [ "Install" ]
-					},					
-					"Install": {
-						"packages": {
-							"yum": {
-								"httpd": [],
-								"git": [],
-								"nodejs" : []
-					  		}
-						}
-					},
-					"sources": {
-						"/var/www/html": "https://wordpress.org/wordpress-4.2.4.tar.gz"
-					},
-					"files": {
-						"/tmp/config": {
-							"content": {"Fn::Join": ["", [
-								"#!/bin/bash -ex\n",
-								"cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php\n",
-								"sed -i \"s/'database_name_here'/'wordpress'/g\" wp-config.php\n",
-								"sed -i \"s/'username_here'/'wordpress'/g\" wp-config.php\n",
-								"sed -i \"s/'password_here'/'wordpress'/g\" wp-config.php\n",
-								"chmod -R 777 wp-content/ \n",
-								"echo  'hello' > test.txt\n"
-							]]},
-							"mode": "000500",
-							"owner": "root",
-							"group": "root"
-						}
-					},
-					"commands": {
-						"01_config": {
-							"command": "/tmp/config",
-							"cwd": "/var/www/html/wordpress"
-						}
-					}										
 				}
 			}
 		}
