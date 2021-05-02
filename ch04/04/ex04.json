@@ -52,7 +52,7 @@
 					  		}
 						},
 						"sources": {
-							"/var/www/html": "https://raw.githubusercontent.com/kickscar/aws-practices/master/04/mysite/index.html"
+							"/var/www/html": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/mysite/index.html"
 						}
 					}
 				},
