@@ -115,13 +115,13 @@
 		"InstanceId": {
 			"Description": "the instance's id of EC2 instance created newly",
 			"Value": {
-				"Ref": "EC2Instance"
+				"Ref": "WebServerInstance"
 			}
 		},
 		"PublicName": {
 			"Description": "public name (connect via SSH as user ec2-user)",
 			"Value": {
-				"Fn::GetAtt": ["EC2Instance", "PublicDnsName"]
+				"Fn::GetAtt": ["WebServerInstance", "PublicDnsName"]
 			}
 		}
 	}
