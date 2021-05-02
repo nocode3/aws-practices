@@ -48,12 +48,30 @@
 					"Install": {
 						"packages": {
 							"yum": {
-								"httpd": []
+								"httpd": [],
+								"git": [],
+								"nodejs" : []
 					  		}
 						},
 						"sources": {
-							"/var/www/html": "https://raw.githubusercontent.com/kickscar/aws-practices/master/04/mysite/index.html"
-						}
+							"/var/www/html": "https://wordpress.org/wordpress-4.2.4.tar.gz"
+						},
+						"files": {
+							"/tmp/config": {
+								"content": {"Fn::Join": ["", [
+									"#!/bin/bash -ex\n",
+									"cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php\n",
+									"sed -i \"s/'database_name_here'/'wordpress'/g\" wp-config.php\n",
+									"sed -i \"s/'username_here'/'wordpress'/g\" wp-config.php\n",
+									"sed -i \"s/'password_here'/'wordpress'/g\" wp-config.php\n",
+									"chmod -R 777 wp-content/ \n",
+									"echo  'hello' > test.txt\n"
+								]]},
+								"mode": "000500",
+								"owner": "root",
+								"group": "root"
+							}
+						}												
 					}
 				},
 				"services": {

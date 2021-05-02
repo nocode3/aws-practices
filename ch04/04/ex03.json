@@ -14,10 +14,9 @@
 			"AllowedValues": ["t2.micro", "t2.small", "t2.medium"]
 		},
 		"VPC": {
-			"Description": "Just select the one and only default VPC",
-			"Type": "AWS::EC2::VPC::Id",
-            "Default": "vpc-27cb4b4c"
-		}		       
+			"Description": "Must be set bt parameter",
+			"Type": "AWS::EC2::VPC::Id"
+		}
 	},
 	"Resources": {
 		"SecurityGroup": {
