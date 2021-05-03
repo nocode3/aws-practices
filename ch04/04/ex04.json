@@ -32,9 +32,9 @@
 					"ToPort": 22
 				}, {
 					"CidrIp": "0.0.0.0/0",
-					"FromPort": 8080,
+					"FromPort": 80,
 					"IpProtocol": "tcp",
-					"ToPort": 8080
+					"ToPort": 80
 				}]
 			}
 		}, 		
@@ -62,24 +62,24 @@
 									"<body>\n",
 									"    <h1>Hello World</h1>\n",
 									"</body>\n",
-									"</html>"
+									"</html>\n"
 								]]},
-								"mode": "000500",
-								"owner": "root",
-								"group": "root"
+								"mode": "000644",
+								"owner": "apache",
+								"group": "apache"
+							}
+						},
+						"services": {
+							"sysvinit": {
+								"httpd": {
+									"enabled": "true",
+									"ensureRunning": "true"
+								}
 							}
 						}
 					}
-				},
-				"services": {
-					"sysvinit": {
-						"httpd": {
-							"enabled": "true",
-							"ensureRunning": "true"
-						}
-					}
 				}
-			},			
+			},
 			"Properties": {
 				"ImageId": "ami-07464b2b9929898f8",
 				"InstanceType": {
@@ -96,8 +96,7 @@
 						"Fn::Join": [ "", [
 							"#!/bin/bash -ex\n",
 							"yum install -y aws-cfn-bootstrap\n",
-							"curl --silent --location https://rpm.nodesource.com/setup_7.x | bash - \n",
-							"/opt/aws/bin/cfn-init -v ", 
+							"/opt/aws/bin/cfn-init -v ",
 							" --stack ", {"Ref": "AWS::StackName"},
 							" --resource WebServerInstance ",
 							" --configsets Install ",							
