@@ -4,7 +4,7 @@
 	"Parameters": {
 		"KeyName": {
 			"Description": "the Key Pair for Accessing to EC2 Instance",
-			"Type": "String",
+			"Type": "String"
 		},
         "InstanceType": {
 			"Description": "Select One of the Possible Instance Types",
