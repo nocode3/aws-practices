@@ -51,13 +51,8 @@
 								"httpd": []
 					  		}
 						},
-						"files": {
-							"/var/www/html/index.html": {
-								"source": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/index.html",
-								"mode": "000644",
-								"owner": "apache",
-								"group": "apache"
-							}
+						"sources": {
+							"/var/www/html": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/mysite.tar.gz"
 						},
 						"services": {
 							"sysvinit": {
