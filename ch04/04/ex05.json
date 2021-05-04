@@ -53,17 +53,7 @@
 						},
 						"files": {
 							"/var/www/html/index.html": {
-								"content": {"Fn::Join": ["", [
-									"<!DOCTYPE html>\n",
-									"<head>\n",
-									"    <meta charset=\"UTF-8\">\n",
-									"    <title>Title</title>\n",
-									"</head>\n",
-									"<body>\n",
-									"    <h1>Hello World</h1>\n",
-									"</body>\n",
-									"</html>\n"
-								]]},
+								"source": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/index.html",
 								"mode": "000644",
 								"owner": "apache",
 								"group": "apache"
