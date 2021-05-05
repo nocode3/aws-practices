@@ -52,6 +52,38 @@
 						},
 						"sources": {
 							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp1/tarball/master"
+						},
+						"files": {
+							"/usr/lib/systemd/system/node-server.service": {
+								"content": {"Fn::Join": ["", [
+									"[Unit]\n",
+									"After=network.target\n",
+									"\n",
+									"[Service]\n",
+									"ExecStart=node /usr/local/myapp/index.js\n",
+									"Restart=always\n",
+									"StandardOutput=syslog\n",
+									"TimeoutSec=90\n",
+									"SyslogIdentifier=node-server\n",
+									"User=nobody\n",
+									"Group=nobody\n",
+									"Environment=PATH=/usr/bin:/usr/local/bin\n",
+									"\n",
+									"[Install]\n",
+									"WantedBy=multi-user.target\n"
+								]]},
+								"mode": "000644",
+								"owner": "root",
+								"group": "root"
+							}
+						},
+						"services": {
+							"sysvinit": {
+								"node-server": {
+									"enabled": "true",
+									"ensureRunning": "true"
+								}
+							}
 						}
 					}
 				}
