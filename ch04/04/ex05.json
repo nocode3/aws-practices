@@ -3,18 +3,18 @@
 	"Description": "Deploy Web Application of HelloWorld on EC2 instance of the Amazon Linux 64bit AMI",
 	"Parameters": {
 		"KeyName": {
-			"Description": "the Key Pair for accessing to EC2 instance",
+			"Description": "the Key Pair for Accessing to EC2 Instance",
 			"Type": "String",
 			"Default": "mykey2"
 		},
         "InstanceType": {
-			"Description": "Select one of the possible instance types",
+			"Description": "One of the Possible Instance Types",
 			"Type": "String",
 			"Default": "t2.micro",
 			"AllowedValues": ["t2.micro", "t2.small", "t2.medium"]
 		},
 		"VPC": {
-			"Description": "Just select the one and only default VPC",
+			"Description": "VPC Id",
 			"Type": "AWS::EC2::VPC::Id"
 		}		       
 	},
@@ -22,7 +22,7 @@
 		"SecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
-				"GroupDescription": "My security group",
+				"GroupDescription": "My Security Group",
                 "GroupName": "MySecurityGroup",
 				"VpcId": {"Ref": "VPC"},
 				"SecurityGroupIngress": [{
@@ -99,13 +99,13 @@
 	},
 	"Outputs": {
 		"InstanceId": {
-			"Description": "the instance's id of EC2 instance created newly",
+			"Description": "the Instance's Id of EC2 Instance Created Newly",
 			"Value": {
 				"Ref": "WebServerInstance"
 			}
 		},
 		"PublicName": {
-			"Description": "public name (connect via SSH as user ec2-user)",
+			"Description": "Public Name (Connect via SSH as User ec2-user)",
 			"Value": {
 				"Fn::GetAtt": ["WebServerInstance", "PublicDnsName"]
 			}
