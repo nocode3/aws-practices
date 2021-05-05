@@ -54,7 +54,7 @@
 					"Fn::Base64": {
 						"Fn::Join": [ "",[
 							"#!/bin/bash -ex\n",
-							"curl -s https://raw.githubusercontent.com/kickscar/aws-practices/master/myapp/setup.sh | bash -ex\n"		
+							"curl -s https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/setup.sh | bash -ex\n"
 						]]
 					}
 				}
