@@ -60,7 +60,7 @@
 									"After=network.target\n",
 									"\n",
 									"[Service]\n",
-									"ExecStart=node /usr/local/myapp/index.js\n",
+									"ExecStart=/usr/bin/node /usr/local/myapp/index.js\n",
 									"Restart=always\n",
 									"StandardOutput=syslog\n",
 									"TimeoutSec=90\n",
