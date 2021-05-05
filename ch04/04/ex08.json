@@ -51,7 +51,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp1/tarball/master"
+							"/usr/local/myapp": "https://github.com/kickscar/myapp1/tarball/master"
 						},
 						"files": {
 							"/usr/lib/systemd/system/node-server.service": {

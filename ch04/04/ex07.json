@@ -51,7 +51,7 @@
 					  		}
 						},
 						"sources": {
-							"/var/www/html": "https://github.com/aws-bitacademy/mysite/tarball/master"
+							"/var/www/html": "https://github.com/kickscar/mysite/tarball/master"
 						},
 						"services": {
 							"sysvinit": {
