@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Deploy Node Application of myapp1 on EC2 instance of the Amazon Linux 64bit AMI",
+	"Description": "Deploy Node Application of myapp2 on EC2 instance of the Amazon Linux 64bit AMI",
 	"Parameters": {
 		"KeyName": {
 			"Description": "the Key Pair for Accessing to EC2 Instance",
@@ -51,7 +51,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp1/tarball/master"
+							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp2/tarball/master"
 						},
 						"files": {
 							"/usr/lib/systemd/system/node-server.service": {
@@ -76,6 +76,10 @@
 								"owner": "root",
 								"group": "root"
 							}
+						},
+						"commands": {
+							"command": "npm install",
+							"cwd": "/usr/local/myapp"
 						},
 						"services": {
 							"sysvinit": {
