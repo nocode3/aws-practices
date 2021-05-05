@@ -78,8 +78,10 @@
 							}
 						},
 						"commands": {
-							"command": "npm install",
-							"cwd": "/usr/local/myapp"
+							"01_install_dependency": {
+								"command": "/usr/bin/npm install",
+								"cwd": "/usr/local/myapp"
+							}
 						},
 						"services": {
 							"sysvinit": {
