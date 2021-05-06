@@ -22,7 +22,7 @@
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
 				"GroupDescription": "My Security Group",
-                "GroupName": "MySecurityGroup",
+				"GroupName": "MySecurityGroup",
 				"VpcId": {
 					"Ref": "VPC"
 				},
@@ -71,7 +71,7 @@
 				"InstanceType": {
 					"Ref": "InstanceType"
 				},
-				"SecurityGroupIds" : [{ 
+				"SecurityGroupIds" : [{
 					"Fn::GetAtt" : ["SecurityGroup", "GroupId"]
 				}],				
 				"KeyName": {

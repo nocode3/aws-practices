@@ -22,7 +22,7 @@
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
 				"GroupDescription": "My Security Group",
-                "GroupName": "MySecurityGroup",
+				"GroupName": "MySecurityGroup",
 				"VpcId": {
 					"Ref": "VPC"
 				},
@@ -33,7 +33,7 @@
 					"ToPort": 22
 				}]
 			}
-		}, 		
+		},
 		"MyServer": {
 			"Type": "AWS::EC2::Instance",
 			"Properties": {

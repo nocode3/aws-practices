@@ -15,14 +15,14 @@
 		"VPC": {
 			"Description": "VPC Id",
 			"Type": "AWS::EC2::VPC::Id"
-		}		       
+		}
 	},
 	"Resources": {
 		"SecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
 				"GroupDescription": "My Security Group",
-                "GroupName": "MySecurityGroup",
+				"GroupName": "MySecurityGroup",
 				"VpcId": {
 					"Ref": "VPC"
 				},
@@ -38,14 +38,14 @@
 					"ToPort": 80
 				}]
 			}
-		}, 		
+		},
 		"WebServerInstance": {
 			"Type": "AWS::EC2::Instance",
 			"Metadata": {
 				"AWS::CloudFormation::Init": {
 					"configSets": {
 						"config01": ["Install"]
-					},					
+					},
 					"Install": {
 						"packages": {
 							"yum": {
@@ -76,9 +76,9 @@
 				"InstanceType": {
 					"Ref": "InstanceType"
 				},
-				"SecurityGroupIds" : [{ 
+				"SecurityGroupIds" : [{
 					"Fn::GetAtt" : ["SecurityGroup", "GroupId"]
-				}],				
+				}],
 				"KeyName": {
 					"Ref": "KeyName"
 				},
@@ -93,7 +93,7 @@
 							" --configsets config01 ",
 							" --region ", {"Ref": "AWS::Region"}, "\n"
 						]]
-					}	
+					}
 				}
 			}
 		}
