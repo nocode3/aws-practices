@@ -23,7 +23,9 @@
 			"Properties": {
 				"GroupDescription": "My Security Group",
                 "GroupName": "MySecurityGroup",
-				"VpcId": {"Ref": "VPC"},
+				"VpcId": {
+					"Ref": "VPC"
+				},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
 					"FromPort": 22,

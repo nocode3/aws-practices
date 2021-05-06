@@ -23,7 +23,9 @@
 			"Properties": {
 				"GroupDescription": "My Security Group",
                 "GroupName": "MySecurityGroup",
-				"VpcId": {"Ref": "VPC"},
+				"VpcId": {
+					"Ref": "VPC"
+				},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
 					"FromPort": 22,
@@ -36,10 +38,12 @@
 			"Type": "AWS::EC2::Instance",
 			"Properties": {
 				"ImageId": "ami-07464b2b9929898f8",
-				"InstanceType": {"Ref": "InstanceType" },
-                "SecurityGroupIds" : [ 
-                    { "Fn::GetAtt" : [ "SecurityGroup", "GroupId" ] }
-                ],				
+				"InstanceType": {
+					"Ref": "InstanceType"
+				},
+                "SecurityGroupIds" : [{
+					"Fn::GetAtt" : [ "SecurityGroup", "GroupId" ]
+				}],
 				"KeyName": {
 					"Ref": "KeyName"
 				}
