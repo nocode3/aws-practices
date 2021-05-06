@@ -6,7 +6,7 @@
 			"Description": "the Key Pair for Accessing to EC2 Instance",
 			"Type": "String"
 		},
-        "InstanceType": {
+		"InstanceType": {
 			"Description": "One of the Possible Instance Types",
 			"Type": "String",
 			"Default": "t2.micro",
