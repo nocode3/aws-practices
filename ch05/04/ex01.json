@@ -25,9 +25,6 @@
 				"InstanceType": {
 					"Ref": "InstanceType"
 				},
-				"SecurityGroupIds" : [{
-					"Fn::GetAtt" : [ "SecurityGroup", "GroupId" ]
-				}],
 				"KeyName": {
 					"Ref": "KeyName"
 				}
