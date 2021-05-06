@@ -49,11 +49,11 @@
         },
         "Path": "/",
         "Policies": [{
-          "PolicyName": "ec2",
+          "PolicyName": "EC2StopPolicy",
           "PolicyDocument": {
             "Version": "2012-10-17",
             "Statement": [{
-              "Sid": "Stmt1425388787000",
+              "Sid": "Stmt202001011205",
               "Effect": "Allow",
               "Action": ["ec2:StopInstances"],
               "Resource": ["*"],
