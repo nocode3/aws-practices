@@ -18,6 +18,22 @@
 		}
 	},
 	"Resources": {
+		"SecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "My Security Group",
+				"GroupName": "MySecurityGroup",
+				"VpcId": {
+					"Ref": "VPC"
+				},
+				"SecurityGroupIngress": [{
+					"IpProtocol": "icmp",
+					"FromPort": "-1",
+					"ToPort": "-1",
+					"CidrIp": "0.0.0.0/0"
+				}]
+			}
+		},
 		"MyServer": {
 			"Type": "AWS::EC2::Instance",
 			"Properties": {
@@ -25,6 +41,9 @@
 				"InstanceType": {
 					"Ref": "InstanceType"
 				},
+				"SecurityGroupIds" : [{
+					"Fn::GetAtt" : [ "SecurityGroup", "GroupId" ]
+				}],
 				"KeyName": {
 					"Ref": "KeyName"
 				}
