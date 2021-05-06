@@ -23,7 +23,9 @@
 			"Properties": {
 				"GroupDescription": "My Security Group",
                 "GroupName": "MySecurityGroup",
-				"VpcId": {"Ref": "VPC"},
+				"VpcId": {
+					"Ref": "VPC"
+				},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
 					"FromPort": 22,
@@ -56,7 +58,11 @@
 							"Action": ["ec2:StopInstances"],
 							"Resource": ["*"],
 							"Condition": {
-								"StringEquals": {"ec2:ResourceTag/aws:cloudformation:stack-id": {"Ref": "AWS::StackId"}}
+								"StringEquals": {
+									"ec2:ResourceTag/aws:cloudformation:stack-id": {
+										"Ref": "AWS::StackId"
+									}
+								}
 							}
 						}]
 					}
