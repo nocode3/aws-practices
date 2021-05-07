@@ -123,7 +123,7 @@
 		}
 	},
 	"Outputs": {
-		"BastionPublicName": {
+		"BastionServerPublicName": {
 			"Description": "Public Name (Connect via SSH as User ec2-user) of BastionServer",
 			"Value": {
 				"Fn::GetAtt": [ "BastionServer", "PublicDnsName"]
