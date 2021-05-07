@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Create an EC2 instance of the Amazon Linux 64bit AMI",
+	"Description": "Create an Bastion Host & Other Server of the Amazon Linux 64bit AMI",
 	"Parameters": {
 		"KeyName": {
 			"Description": "the Key Pair for Accessing to EC2 Instance",
