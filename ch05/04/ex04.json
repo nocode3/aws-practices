@@ -15,10 +15,6 @@
 		"VPC": {
 			"Description": "VPC Id",
 			"Type": "AWS::EC2::VPC::Id"
-		},
-		"AllowSSHAccessIp": {
-			"Description": "Your public IP address to allow SSH access",
-			"Type": "String"
 		}
 	},
 	"Resources": {
