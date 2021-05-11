@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Deploy Node Application of myapp2 on EC2 instance of the Amazon Linux 64bit AMI",
+	"Description": "Deploy Node Application of myapp on EC2 instance of the Amazon Linux 64bit AMI",
 	"Parameters": {
 		"KeyName": {
 			"Description": "the Key Pair for Accessing to EC2 Instance",
