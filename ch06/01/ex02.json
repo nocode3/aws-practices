@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Deploy 'myapp' Node Application on EC2 & RDS",
+	"Description": "Deploy Node Application(myapp) on EC2 & RDS",
 	"Parameters": {
 		"KeyName": {
 			"Description": "the Key Pair for Accessing to EC2 Instance",
@@ -21,11 +21,11 @@
 			"Type": "String"
 		},
 		"DBUserName": {
-			"Description": "MySQl DB User's Name of DBInstance",
+			"Description": "MySQl DB User Name of DBInstance",
 			"Type": "String"
 		},
 		"DBUserPassword": {
-			"Description": "MySQl DB User's Password of DBInstance",
+			"Description": "MySQl DB User Password of DBInstance",
 			"Type": "String"
 		}
 	},
@@ -54,7 +54,7 @@
 		"DatabaseSecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
-				"GroupDescription": "Security Group of myapp's Database",
+				"GroupDescription": "Security Group of Database",
 				"VpcId": {"Ref": "VPC"},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
@@ -188,7 +188,7 @@
 			}
 		},
 		"InstanceId": {
-			"Description": "the Instance's Id of EC2 Instance Created Newly",
+			"Description": "the Instance Id of EC2 Instance Created",
 			"Value": {
 				"Ref": "NodeServerInstance"
 			}
