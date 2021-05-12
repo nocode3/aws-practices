@@ -11,7 +11,7 @@
 		"DatabaseSecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
-				"GroupDescription": "Security Group of myapp's Database",
+				"GroupDescription": "Security Group for myapp Database",
 				"VpcId": {"Ref": "VPC"},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
@@ -31,7 +31,7 @@
 				"DBName": "myapp",
 				"Engine": "MySQL",
 				"MasterUsername": "myapp",
-				"MasterUserPassword": "myapp1234",
+				"MasterUserPassword": "myapp12345",
 				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
 			}
 		}

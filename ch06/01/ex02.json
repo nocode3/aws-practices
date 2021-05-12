@@ -16,6 +16,10 @@
 			"Description": "VPC Id",
 			"Type": "AWS::EC2::VPC::Id"
 		},
+		"ServicePort": {
+			"Description": "Node Server Listen Port",
+			"Type": "Number"
+		},
 		"DBName": {
 			"Description": "MySQl DB Name of DBInstance",
 			"Type": "String"
@@ -30,7 +34,7 @@
 		}
 	},
 	"Resources": {
-		"SecurityGroup": {
+		"NodeServerSecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
 				"GroupDescription": "My Security Group",
@@ -45,9 +49,9 @@
 					"ToPort": 22
 				}, {
 					"CidrIp": "0.0.0.0/0",
-					"FromPort": 8080,
+					"FromPort": {"Ref":  "ServicePort"},
 					"IpProtocol": "tcp",
-					"ToPort": 8080
+					"ToPort": {"Ref":  "ServicePort"}
 				}]
 			}
 		},
@@ -77,7 +81,7 @@
 				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
 			}
 		},
-		"NodeServerInstance": {
+		"NodeServer": {
 			"Type": "AWS::EC2::Instance",
 			"Metadata": {
 				"AWS::CloudFormation::Init": {
@@ -94,6 +98,20 @@
 							"/usr/local/myapp": "https://github.com/kickscar/myapp3/tarball/master"
 						},
 						"files": {
+							"/usr/local/myapp/config/app.env": {
+								"content": {
+									"Fn::Join": ["", [
+										"PROFILE=production\n",
+										"LOG_LOCATION=logs\n",
+										"PORT=", {"Ref" : "ServicePort"}, "\n",
+										"MULTER_TEMPORARY_STORE='multer-temporary-store'\n",
+										"STATIC_RESOURCES_DIRECTORY=public\n"
+									]]
+								},
+								"mode": "000644",
+								"owner": "root",
+								"group": "root"
+							},
 							"/usr/local/myapp/config/db.env": {
 								"content": {
 									"Fn::Join": ["", [
@@ -157,7 +175,7 @@
 					"Ref": "InstanceType"
 				},
 				"SecurityGroupIds" : [{
-					"Fn::GetAtt" : ["SecurityGroup", "GroupId"]
+					"Fn::GetAtt" : ["NodeServerSecurityGroup", "GroupId"]
 				}],				
 				"KeyName": {
 					"Ref": "KeyName"
@@ -170,7 +188,7 @@
 							"curl --silent --location https://rpm.nodesource.com/setup_12.x | bash - \n",
 							"/opt/aws/bin/cfn-init -v ",
 							" --stack ", {"Ref": "AWS::StackName"},
-							" --resource NodeServerInstance ",
+							" --resource NodeServer ",
 							" --configsets config01 ",
 							" --region ", {"Ref": "AWS::Region"}, "\n"
 						]]
@@ -181,21 +199,21 @@
 	},
 	"Outputs": {
 		"DatabaseEndpoint": {
-			"Description": "the Endpoint of RDS Instance Created",
+			"Description": "the RDS Endpoint of myapp MySql Created",
 			"Value": {
 				"Fn::GetAtt": ["Database", "Endpoint.Address"]
 			}
 		},
-		"InstanceId": {
-			"Description": "the Instance Id of EC2 Instance Created",
+		"NodeServerInstanceId": {
+			"Description": "the EC2 Instance Id of Node Server Created",
 			"Value": {
-				"Ref": "NodeServerInstance"
+				"Ref": "NodeServer"
 			}
 		},
-		"PublicName": {
-			"Description": "Public Name (Connect via SSH as User ec2-user)",
+		"NodeServerPublicName": {
+			"Description": "Public Name(Connect via SSH as ec2-user Account)",
 			"Value": {
-				"Fn::GetAtt": ["NodeServerInstance", "PublicDnsName"]
+				"Fn::GetAtt": ["NodeServer", "PublicDnsName"]
 			}
 		}
 	}
