@@ -181,7 +181,7 @@
 		}
 	},
 	"Outputs": {
-		"Database Endpoint": {
+		"DatabaseEndpoint": {
 			"Description": "the Endpoint of RDS Instance Created",
 			"Value": {
 				"Fn::GetAtt": ["Database", "Endpoint.Address"]
