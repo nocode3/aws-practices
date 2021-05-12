@@ -92,7 +92,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/myapp2/tarball/master"
+							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp3/tarball/master"
 						},
 						"files": {
 							"/user/local/myapp/config/db.env": {
