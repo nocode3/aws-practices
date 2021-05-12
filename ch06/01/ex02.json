@@ -15,7 +15,19 @@
 		"VPC": {
 			"Description": "VPC Id",
 			"Type": "AWS::EC2::VPC::Id"
-		}		       
+		},
+		"DBName": {
+			"Description": "MySQl DB Name of DBInstance",
+			"Type": "String"
+		},
+		"DBUserName": {
+			"Description": "MySQl DB User's Name of DBInstance",
+			"Type": "String"
+		},
+		"DBUserPassword": {
+			"Description": "MySQl DB User's Password of DBInstance",
+			"Type": "String"
+		}
 	},
 	"Resources": {
 		"SecurityGroup": {
@@ -58,11 +70,11 @@
 			"Properties": {
 				"AllocatedStorage": "5",
 				"DBInstanceClass": "db.t2.micro",
-				"DBInstanceIdentifier": "myapp",
-				"DBName": "myapp",
+				"DBInstanceIdentifier": "myapp-db",
+				"DBName": {"Ref": "DBName"},
 				"Engine": "MySQL",
-				"MasterUsername": "myapp",
-				"MasterUserPassword": "myapp12345",
+				"MasterUsername": {"Ref": "DBUserName"},
+				"MasterUserPassword": {"Ref": "DBUserPassword"},
 				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
 			}
 		},
@@ -86,10 +98,10 @@
 							"/user/local/myapp/config/db.env": {
 								"content": {
 									"Fn::Join": ["", [
-										"DB_HOST=127.0.0.1\n",
-										"DB_NAME=myapp\n",
-										"DB_USER=myapp\n",
-										"DB_PASSWORD=myapp12345\n",
+										"DB_HOST=", {"Fn::GetAtt": ["Database", "Endpoint.Address"]}, "\n",
+										"DB_NAME=", {"Ref": "DBName"}, "\n",
+										"DB_USER=", {"Ref" : "DBUserName"}, "\n",
+										"DB_PASSWORD=", {"Ref": "DBUserPassword"}, "\n",
 										"TABLE_CREATE_ALWAYS=false\n",
 										"TABLE_ALTER_SYNC=true\n"
 									]]
@@ -169,6 +181,12 @@
 		}
 	},
 	"Outputs": {
+		"Database Endpoint": {
+			"Description": "the Endpoint of RDS Instance Created",
+			"Value": {
+				"Fn::GetAtt": ["Database", "Endpoint.Address"]
+			}
+		},
 		"InstanceId": {
 			"Description": "the Instance's Id of EC2 Instance Created Newly",
 			"Value": {
@@ -179,12 +197,6 @@
 			"Description": "Public Name (Connect via SSH as User ec2-user)",
 			"Value": {
 				"Fn::GetAtt": ["NodeServerInstance", "PublicDnsName"]
-			}
-		},
-		"Database Endpoint": {
-			"Description": "the Endpoint of RDS Instance Created",
-			"Value": {
-				"Fn::GetAtt": ["Database", "Endpoint.Address"]
 			}
 		}
 	}
