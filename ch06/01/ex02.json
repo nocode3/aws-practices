@@ -91,10 +91,10 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/aws-bitacademy/myapp3/tarball/master"
+							"/usr/local/myapp": "https://github.com/kickscar/myapp3/tarball/master"
 						},
 						"files": {
-							"/user/local/myapp/config/db.env": {
+							"/usr/local/myapp/config/db.env": {
 								"content": {
 									"Fn::Join": ["", [
 										"DB_HOST=", {"Fn::GetAtt": ["Database", "Endpoint.Address"]}, "\n",
