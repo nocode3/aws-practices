@@ -184,6 +184,7 @@
 					"Fn::Base64": {
 						"Fn::Join": [ "", [
 							"#!/bin/bash -ex\n",
+							"yum -y --security update\n",
 							"yum install -y aws-cfn-bootstrap\n",
 							"curl --silent --location https://rpm.nodesource.com/setup_12.x | bash - \n",
 							"/opt/aws/bin/cfn-init -v ",
