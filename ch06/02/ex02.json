@@ -213,7 +213,7 @@
 								"command": {
 									"Fn::Join": ["", [
 										"/usr/bin/aws s3 mb s3://", {"Ref": "BucketName"},
-										" --region ap-northeast-2"
+										" --region ", {"Ref": "AWS::Region"}
 									]]
 								},
 								"cwd": "/"
