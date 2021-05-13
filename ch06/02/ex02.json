@@ -211,7 +211,7 @@
 						"commands": {
 							"01_create_s3_bucket": {
 								"command": [{
-									"Fn::Join": ["", ["aws s3 mb s3://", {"Ref": "BucketName"}]]
+									"Fn::Join": ["", ["/usr/bin/aws s3 mb s3://", {"Ref": "BucketName"}]]
 								}],
 								"cwd": "/"
 							},
