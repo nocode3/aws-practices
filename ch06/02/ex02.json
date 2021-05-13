@@ -92,7 +92,7 @@
 						"Version": "2012-10-17",
 						"Statement": [{
 							"Effect": "Allow",
-							"Action": ["s3:PutObject", "s3:PutObjectAcl"],
+							"Action": ["CreateBucket", "s3:PutObject", "s3:PutObjectAcl"],
 							"Resource": [{
 								"Fn::Join": ["", ["arn:aws:s3:::", {"Ref": "BucketName" }, "/*"]]
 							}]
@@ -207,7 +207,13 @@
 							}
 						},
 						"commands": {
-							"01_install_dependency": {
+							"01_create_s3_bucket": {
+								"command": [{
+									"Fn::Join": ["", ["aws s3 mb s3://", {"Ref": "BucketName" } ]]
+								}],
+								"cwd": "/"
+							},
+							"02_install_dependency": {
 								"command": "/usr/bin/npm install",
 								"cwd": "/usr/local/myapp"
 							}
