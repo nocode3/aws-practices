@@ -108,7 +108,7 @@
 										"PROFILE=production\n",
 										"LOG_LOCATION=logs\n",
 										"PORT=", {"Ref" : "ServicePort"}, "\n",
-										"MULTER_TEMPORARY_STORE='multer-temporary-store'\n",
+										"MULTER_TEMPORARY_STORE=multer-temporary-store\n",
 										"STATIC_RESOURCES_DIRECTORY=public\n"
 									]]
 								},
