@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Create an RDS Instance of MySQL Engine",
+	"Description": "Create a RDS Instance of MySQL Engine",
 	"Parameters": {
 		"VPC": {
 			"Description": "VPC Id",
@@ -11,7 +11,7 @@
 		"DatabaseSecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
-				"GroupDescription": "Security Group for myapp Database",
+				"GroupDescription": "Database Security Group",
 				"VpcId": {"Ref": "VPC"},
 				"SecurityGroupIngress": [{
 					"CidrIp": "0.0.0.0/0",
