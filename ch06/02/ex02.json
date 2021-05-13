@@ -94,7 +94,9 @@
 							"Effect": "Allow",
 							"Action": ["s3:CreateBucket", "s3:PutObject", "s3:PutObjectAcl"],
 							"Resource": [{
-								"Fn::Join": ["", ["arn:aws:s3:::", {"Ref": "BucketName" }, "/*"]]
+								"Fn::Join": ["", ["arn:aws:s3:::", {"Ref": "BucketName"}]]
+							},{
+								"Fn::Join": ["", ["arn:aws:s3:::", {"Ref": "BucketName"}, "/*"]]
 							}]
 						}]
 					}
@@ -209,7 +211,7 @@
 						"commands": {
 							"01_create_s3_bucket": {
 								"command": [{
-									"Fn::Join": ["", ["aws s3 mb s3://", {"Ref": "BucketName" } ]]
+									"Fn::Join": ["", ["aws s3 mb s3://", {"Ref": "BucketName"}]]
 								}],
 								"cwd": "/"
 							},
