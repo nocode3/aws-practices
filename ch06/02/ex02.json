@@ -146,7 +146,7 @@
 										"PROFILE=production\n",
 										"LOG_LOCATION=logs\n",
 										"PORT=", {"Ref" : "ServicePort"}, "\n",
-										"MULTER_TEMPORARY_STORE='multer-temporary-store'\n",
+										"MULTER_TEMPORARY_STORE=multer-temporary-store\n",
 										"STATIC_RESOURCES_DIRECTORY=public\n"
 									]]
 								},
@@ -172,9 +172,9 @@
 							"/usr/local/myapp/config/store.env": {
 								"content": {
 									"Fn::Join": ["", [
-										"AWS_REGION='", {"Ref": "AWS::Region"}, "'\n",
-										"AWS_S3_BUCKET_NAME='", {"Ref": "BucketName"}, "'\n",
-										"AWS_S3_BUCKET_OBJECT_KEY_PREFIX='assets/photos'\n"
+										"AWS_REGION=", {"Ref": "AWS::Region"}, "\n",
+										"AWS_S3_BUCKET_NAME=", {"Ref": "BucketName"}, "\n",
+										"AWS_S3_BUCKET_OBJECT_KEY_PREFIX=assets/photos\n"
 									]]
 								},
 								"mode": "000644",
