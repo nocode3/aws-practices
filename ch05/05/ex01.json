@@ -134,8 +134,8 @@
         "RuleNumber": "100",
         "Protocol": "6",
         "PortRange": {
-          "From": "-1",
-          "To": "-1"
+          "From": "1",
+          "To": "5000"
         },
         "RuleAction": "allow",
         "Egress": "true",
