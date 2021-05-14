@@ -124,7 +124,7 @@
         "AvailabilityZone": {
           "Fn::Select": ["1", {"Fn::GetAZs": ""}]
         },
-        "CidrBlock": "10.0.2.0/24"
+        "CidrBlock": "10.0.3.0/24"
       }
     },
 
