@@ -169,7 +169,16 @@
 							}
 						},
 						"commands": {
-							"01_install_dependency": {
+							"01_create_s3_bucket": {
+								"command": {
+									"Fn::Join": ["", [
+										"/usr/bin/aws s3 mb s3://", {"Ref": "BucketName"},
+										" --region ", {"Ref": "AWS::Region"}
+									]]
+								},
+								"cwd": "/"
+							},
+							"02_install_dependency": {
 								"command": "/usr/bin/npm install",
 								"cwd": "/usr/local/myapp"
 							}
