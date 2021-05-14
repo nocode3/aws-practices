@@ -14,6 +14,9 @@
     }
   },
   "Resources": {
+
+
+
     "MyVPC": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
@@ -33,6 +36,19 @@
         "InternetGatewayId": {"Ref": "InternetGateway"}
       }
     },
+
+    "Subnet01": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": ["0", {"Fn::GetAZs": ""}]
+        },
+        "CidrBlock": "10.0.1.0/24",
+        "VpcId": {"Ref": "MyVPC"}
+      }
+    },
+
+
     "SecurityGroup": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
@@ -49,21 +65,25 @@
         }]
       }
     },
+
+
     "MyServer": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "ImageId": "ami-07464b2b9929898f8",
-        "InstanceType": {
-          "Ref": "InstanceType"
-        },
-        "SecurityGroupIds" : [{
-          "Fn::GetAtt" : [ "SecurityGroup", "GroupId" ]
-        }],
-        "KeyName": {
-          "Ref": "KeyName"
-        }
+        "InstanceType": {"Ref": "InstanceType"},
+        "KeyName": {"Ref": "KeyName"},
+        "NetworkInterfaces": [{
+          "AssociatePublicIpAddress": "true",
+          "DeleteOnTermination": "true",
+          "SubnetId": {"Ref": "Subnet01"},
+          "DeviceIndex": "0",
+          "GroupSet": [{"Ref": "SecurityGroup"}]
+        }]
       }
     }
+
+
   },
   "Outputs": {
     "InstanceId": {
