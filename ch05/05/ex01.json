@@ -1,0 +1,82 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "VPC Test",
+  "Parameters": {
+    "KeyName": {
+      "Description": "the Key Pair for Accessing to EC2 Instance",
+      "Type": "String"
+    },
+    "InstanceType": {
+      "Description": "One of the Possible Instance Types",
+      "Type": "String",
+      "Default": "t2.micro",
+      "AllowedValues": ["t2.micro", "t2.small", "t2.medium"]
+    }
+  },
+  "Resources": {
+    "MyVPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": "true"
+      }
+    },
+    "InternetGateway": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+      }
+    },
+    "VPCGatewayAttachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": {"Ref": "MyVPC"},
+        "InternetGatewayId": {"Ref": "InternetGateway"}
+      }
+    },
+    "SecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "My Security Group",
+        "GroupName": "MySecurityGroup",
+        "VpcId": {
+          "Ref": "MyVPC"
+        },
+        "SecurityGroupIngress": [{
+          "CidrIp": "0.0.0.0/0",
+          "FromPort": 22,
+          "IpProtocol": "tcp",
+          "ToPort": 22
+        }]
+      }
+    },
+    "MyServer": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "ImageId": "ami-07464b2b9929898f8",
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "SecurityGroupIds" : [{
+          "Fn::GetAtt" : [ "SecurityGroup", "GroupId" ]
+        }],
+        "KeyName": {
+          "Ref": "KeyName"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "InstanceId": {
+      "Description": "the Instance's Id of EC2 Instance Created Newly",
+      "Value": {
+        "Ref": "MyServer"
+      }
+    },
+    "PublicName": {
+      "Description": "Public Name (Connect via SSH as User ec2-user)",
+      "Value": {
+        "Fn::GetAtt": ["MyServer", "PublicDnsName"]
+      }
+    }
+  }
+}
