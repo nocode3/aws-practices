@@ -190,7 +190,7 @@
       "Type": "AWS::RDS::DBSubnetGroup",
       "Properties": {
         "DBSubnetGroupDescription": "Subnets available for the RDS DB Instance",
-        "SubnetIds": [{"Ref": "Subnet02"}, {"Ref": "Subnet02"}]
+        "SubnetIds": [{"Ref": "Subnet02"}, {"Ref": "Subnet03"}]
       }
     },
 
