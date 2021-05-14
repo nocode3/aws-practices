@@ -124,7 +124,7 @@
         },
         "RuleAction": "allow",
         "Egress": "false",
-        "CidrBlock": "10.0.0.0/16"
+        "CidrBlock": "0.0.0.0/0"
       }
     },
     "NetworkAcl01Entry03": {
@@ -139,7 +139,7 @@
         },
         "RuleAction": "allow",
         "Egress": "true",
-        "CidrBlock": "10.0.0.0/16"
+        "CidrBlock": "0.0.0.0/0"
       }
     },
     "NetworkAcl01Entry04": {
