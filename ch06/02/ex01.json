@@ -99,7 +99,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/myapp4/tarball/master"
+							"/usr/local/myapp": "https://github.com/kickscar/myapp/tarball/s3-impl"
 						},
 						"files": {
 							"/usr/local/myapp/config/app.env": {
