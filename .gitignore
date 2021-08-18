@@ -1,3 +1,21 @@
+# for Mac
 **/.DS_Store
-**/.idea
+
+# JavaScript Project
 **/node_modules
+**/public/bundle.js
+**/public/main.js
+**/public/assets
+
+
+# IDE directories and files
+**/.idea
+**/.vscode
+**/.suo
+**/.ntvs*
+**/.njsproj
+**/.sln
+**/.sw?
+
+# private resources
+**/PrivateResources
