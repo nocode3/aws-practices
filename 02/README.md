@@ -1,10 +1,29 @@
 ## AWS Practices - Building Virtual Infrastructure: 가상 인프라 구축
 
 ### ch03. 가상 서버: EC2
-1. 가상화와 EC2 
+1. 가상화와 EC2
+   - Hypervior: type1(HVM, PVM), type2
+   - AMI
+   - Instance
 2. 가상 서버 시작
+   - EC2 인스턴스 생성
+   - 가상 서버 시작
 3. 가상 서버 운영
+   - ssh: 가상 서버 접속
+   - 가상 서버 모니터링
+   - 가상 서버 상태 변경
+   - 가상 서버 크기 변경
 4. 네트워크 설정
+    - Security Group: 방화벽: 아파치 웹서버 운영
+
+      ```bash
+      # yum install -y httpd
+      # systemctl enable httpd
+      # service httpd start
+      ```
+      
+    - 고정 IP (Elastic IP): 아파치 웹서버 접속
+    - Network Interface 추가(다른 IP 주소의 웹사이트 운영하기)
 
 ### ch04. 인프라 프로그래밍 기본
 1. AWS API 소개 
