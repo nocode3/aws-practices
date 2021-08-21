@@ -1,7 +1,7 @@
 //
 // EC2 인스턴스 생성
 //
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 ec2 = new AWS.EC2({
     region: 'ap-northeast-2',
@@ -9,7 +9,7 @@ ec2 = new AWS.EC2({
 });
 
 ec2.runInstances({
-    ImageId: 'ami-018a9a930060d38aa',
+    ImageId: 'ami-07464b2b9929898f8',
     MaxCount: 1,
     MinCount: 1,
     Monitoring: {
@@ -17,11 +17,11 @@ ec2.runInstances({
     },
     DryRun: false,
     InstanceType: 't2.micro',
-    KeyName: 'mykey'
+    KeyName: 'mykey2'
 }, function (error, data) {
-    if(error){
-      console.log(error, error.stack);
-      return;
+    if (error) {
+        console.log(error, error.stack);
+        return;
     }
     console.log(data);
 });

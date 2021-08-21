@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-echo "[1] Get the ID of [1] Get the ID of Amazon Linux AMI..."
+echo '[1] Get the ID of Amazon Linux AMI...'
 AMIID=$(aws ec2 describe-images --query "Images[?Description=='Amazon Linux 2 AMI 2.0.20210326.0 x86_64 HVM gp2'].ImageId" --output text)
 
 echo '[2] Get the default VPC ID...'

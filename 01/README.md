@@ -1,9 +1,9 @@
-## AWS Practices - Getting Started: AWS 시작하기
+## AWS Practices - 01. Getting Started: AWS 시작하기
 
 ### ch01. AWS 소개
 1. 클라우드 컴퓨팅 
 2. 아마존 웹 서비스
-3. 기본 개념 
+3. 기본 개념
 4. 활용 사례 
 5. AWS 비용 
 6. AWS 서비스

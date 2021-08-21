@@ -1,7 +1,7 @@
 //
 // EC2 인스턴스를 정지
 //
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 ec2 = new AWS.EC2({
   region: 'ap-northeast-2',
@@ -9,7 +9,7 @@ ec2 = new AWS.EC2({
 });
 
 ec2.stopInstances({
-  InstanceIds: ['i-090a8d8483a0d480a'],
+  InstanceIds: ['i-0112887371112fbfd'],
   DryRun: false,
   Force: false
 }, function (error, data) {

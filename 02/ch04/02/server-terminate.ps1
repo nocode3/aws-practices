@@ -15,15 +15,14 @@ $SGID=$ARR[1]
 Write-Host $INSTANCEID
 Write-Host $SGID
 
-
 if($INSTANCEID -ne ""){ 
     # Terminate the server(silently)
     aws ec2 terminate-instances --instance-ids $INSTANCEID
-    echo "terminating $INSTANCEID ..."
+    Write-Host "terminating '$INSTANCEID' ..."
     aws ec2 wait instance-terminated --instance-ids $INSTANCEID
 
     # Delete the security group
     aws ec2 delete-security-group --group-id $SGID
 }else{
-    echo 'Instance doesn not exist'
+    Write-Host 'Instance doesn not exist'
 }
