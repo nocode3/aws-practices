@@ -1,10 +1,10 @@
 #! /bin/bash
 sudo yum install git -y
-sudo curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
+sudo curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
 sudo yum -y install nodejs
 
-git clone https://github.com/kickscar/myapp2.git
-cd /myapp2
+git clone -b basic --single-branch https://github.com/kickscar/aws-example-myapp.git myapp
+cd myapp
 
 npm install
 node index.js &
