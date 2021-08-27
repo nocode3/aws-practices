@@ -54,7 +54,7 @@
 						},
 						"files": {
 							"/var/www/html/index.html": {
-								"source": "https://raw.githubusercontent.com/kickscar/aws-practices/master/ch04/04/index.html",
+								"source": "https://raw.githubusercontent.com/kickscar/aws-practices/master/02/ch04/04/index.html",
 								"mode": "000644",
 								"owner": "apache",
 								"group": "apache"
