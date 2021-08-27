@@ -51,7 +51,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/myapp2/tarball/master"
+							"/usr/local/myapp": "https://github.com/kickscar/aws-example-myapp/tarball/navigational"
 						},
 						"files": {
 							"/usr/lib/systemd/system/node-server.service": {
@@ -116,7 +116,7 @@
 							"# cfn-init update\n",
 							"yum install -y aws-cfn-bootstrap\n",
 
-							"curl --silent --location https://rpm.nodesource.com/setup_7.x | bash - \n",
+							"curl --silent --location https://rpm.nodesource.com/setup_14.x | bash - \n",
 							"/opt/aws/bin/cfn-init -v ",
 							" --stack ", {"Ref": "AWS::StackName"},
 							" --resource NodeServerInstance ",
