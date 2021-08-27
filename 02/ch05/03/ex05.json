@@ -99,6 +99,7 @@
             "Fn::Join": ["", [
               "#!/bin/bash -ex\n",
               "INSTANCEID=`curl -s http://169.254.169.254/latest/meta-data/instance-id`\n",
+              "echo \"aws --region ", {"Ref": "AWS::Region"},
               " ec2 stop-instances --instance-ids $INSTANCEID\" | at now + 5 minutes\n"
             ]]
           }
