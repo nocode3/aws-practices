@@ -48,7 +48,25 @@
           }]
         },
         "Path": "/",
-        "Policies": []
+        "Policies": [{
+          "PolicyName": "EC2StopPolicy",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Sid": "Stmt202001011205",
+              "Effect": "Allow",
+              "Action": ["ec2:StopInstances"],
+              "Resource": ["*"],
+              "Condition": {
+                "StringEquals": {
+                  "ec2:ResourceTag/aws:cloudformation:stack-id": {
+                    "Ref": "AWS::StackId"
+                  }
+                }
+              }
+            }]
+          }
+        }]
       }
     },
     "InstanceProfile": {
