@@ -48,25 +48,7 @@
           }]
         },
         "Path": "/",
-        "Policies": [{
-          "PolicyName": "EC2StopPolicy",
-          "PolicyDocument": {
-            "Version": "2012-10-17",
-            "Statement": [{
-              "Sid": "Stmt202001011205",
-              "Effect": "Allow",
-              "Action": ["ec2:StopInstances"],
-              "Resource": ["*"],
-              "Condition": {
-                "StringEquals": {
-                  "ec2:ResourceTag/aws:cloudformation:stack-id": {
-                    "Ref": "AWS::StackId"
-                  }
-                }
-              }
-            }]
-          }
-        }]
+        "Policies": []
       }
     },
     "InstanceProfile": {
@@ -99,7 +81,6 @@
             "Fn::Join": ["", [
               "#!/bin/bash -ex\n",
               "INSTANCEID=`curl -s http://169.254.169.254/latest/meta-data/instance-id`\n",
-              "echo \"aws --region ", {"Ref": "AWS::Region"},
               " ec2 stop-instances --instance-ids $INSTANCEID\" | at now + 5 minutes\n"
             ]]
           }
