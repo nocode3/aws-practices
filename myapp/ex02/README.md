@@ -18,7 +18,7 @@
 ```bash
 $ aws cloudformation create-stack /
 --stack-name myapp /
---template-body https://raw.githubusercontent.com/kickscar/aws-practices/master/ch06/01/ex02.json /
+--template-body https://raw.githubusercontent.com/kickscar/aws-practices/master/03/ch06/03/ex02.json /
 --parameters /
 ParameterKey=InstanceType,ParameterValue=t2.micro /
 ParameterKey=KeyName,ParameterValue={yourSSHkeyName} /
