@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/kickscar/DoWork/IdeaProjects/aws-practices/myapp/ex01/logs/.abee85001a2f6abeefd77acb05ea21c42ef09b62-audit.json",
+    "files": [
+        {
+            "date": 1631099247049,
+            "name": "/Users/kickscar/DoWork/IdeaProjects/aws-practices/myapp/ex01/logs/2021-09-08.log",
+            "hash": "85b5da11557e69a52f60f73cf8534145"
+        }
+    ]
+}
