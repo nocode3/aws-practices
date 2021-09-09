@@ -8,6 +8,13 @@
 		}		       
 	},
 	"Resources": {
+		"DBSubnetGroup": {
+			"Type": "AWS::RDS::DBSubnetGroup",
+			"Properties": {
+				"DBSubnetGroupDescription": "Subnets available for the RDS DB Instance",
+				"SubnetIds": ["subnet-0a28f89647a58f3bb", "subnet-0ec6e1b16ebfffd1f"]
+			}
+		},
 		"DatabaseSecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
@@ -32,6 +39,7 @@
 				"Engine": "MySQL",
 				"MasterUsername": "myapp",
 				"MasterUserPassword": "myapp12345",
+				"DBSubnetGroupName" : {"Ref": "DBSubnetGroup"},
 				"VPCSecurityGroups": [{"Fn::GetAtt": ["DatabaseSecurityGroup", "GroupId"]}]
 			}
 		}

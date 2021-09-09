@@ -1,4 +1,4 @@
-# AWS CloudFormation Template Example
+# AWS CloudFormation Template Example: myapp
 
 ### 1. Node Application (PROFILE: dev)
 ### 2. Local MySQL
