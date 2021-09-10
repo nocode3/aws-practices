@@ -88,8 +88,7 @@
 					"Ref": "VPC"
 				},
 				"AvailabilityZone": "ap-northeast-2a",
-				"CidrBlock": "10.0.1.0/24",
-				"MapPublicIpOnLaunch" : true
+				"CidrBlock": "10.0.1.0/24"
 			}
 		},
 		"RouteTable01": {
@@ -253,8 +252,7 @@
 					"Ref": "VPC"
 				},
 				"AvailabilityZone": "ap-northeast-2a",
-				"CidrBlock": "10.0.2.0/24",
-				"MapPublicIpOnLaunch" : true
+				"CidrBlock": "10.0.2.0/24"
 			}
 		},
 		"RouteTable02": {
@@ -352,8 +350,7 @@
 					"Ref": "VPC"
 				},
 				"AvailabilityZone": "ap-northeast-2c",
-				"CidrBlock": "10.0.3.0/24",
-				"MapPublicIpOnLaunch" : true
+				"CidrBlock": "10.0.3.0/24"
 			}
 		},
 		"RouteTable03": {
