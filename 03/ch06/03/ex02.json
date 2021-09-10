@@ -479,7 +479,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/aws-practices/tree/master/myapp/ex02"
+							"/usr/local/myapp": "https://github.com/kickscar/myapp-ex02/tarball/main"
 						},
 						"files": {
 							"/usr/local/myapp/config/app.env": {
