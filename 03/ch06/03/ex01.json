@@ -341,6 +341,7 @@
         "Engine": "MySQL",
         "MasterUsername": "myapp",
         "MasterUserPassword": "myapp12345",
+        "PubliclyAccessible": true,
         "DBSubnetGroupName": {"Ref": "DBSubnetGroup"},
         "VPCSecurityGroups": [{"Ref": "VPCSecurityGroup"}]
       }
