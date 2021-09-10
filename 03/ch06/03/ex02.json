@@ -12,10 +12,6 @@
 			"Default": "t2.micro",
 			"AllowedValues": ["t2.micro", "t2.small", "t2.medium"]
 		},
-		"VPC": {
-			"Description": "VPC Id",
-			"Type": "AWS::EC2::VPC::Id"
-		},
 		"ServicePort": {
 			"Description": "Node Server Listen Port",
 			"Type": "Number"
