@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Create a RDS Instance of MySQL Engine",
+  "Description": "Create a RDS Instance of MySQL Engine2",
   "Parameters": {
   },
 
