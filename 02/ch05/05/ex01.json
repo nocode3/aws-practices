@@ -14,12 +14,11 @@
     }
   },
   "Resources": {
-
     "InternetGateway": {
       "Type": "AWS::EC2::InternetGateway",
       "Properties": {}
     },
-    "MyVPC": {
+    "VPC": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
         "CidrBlock": "10.0.0.0/16",
@@ -33,13 +32,15 @@
         "InternetGatewayId": {"Ref": "InternetGateway"}
       }
     },
+
+
     "MyVPCSecurityGroup": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
         "GroupDescription": "My VPC Security Group",
         "GroupName": "MyVPCSecurityGroup",
         "VpcId": {
-          "Ref": "MyVPC"
+          "Ref": "VPC"
         },
         "SecurityGroupIngress": [{
           "IpProtocol": "-1",
@@ -57,21 +58,18 @@
     },
 
 
-
     "Subnet01": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "VpcId": {"Ref": "MyVPC"},
-        "AvailabilityZone": {
-          "Fn::Select": ["0", {"Fn::GetAZs": ""}]
-        },
+        "VpcId": {"Ref": "VPC"},
+        "AvailabilityZone": "ap-northeast-2a",
         "CidrBlock": "10.0.1.0/24"
       }
     },
     "RouteTable01": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {"Ref": "MyVPC"}
+        "VpcId": {"Ref": "VPC"}
       }
     },
     "RouteTable01Route": {
@@ -94,7 +92,14 @@
     "NetworkAcl01": {
       "Type": "AWS::EC2::NetworkAcl",
       "Properties": {
-        "VpcId": {"Ref": "MyVPC"}
+        "VpcId": {"Ref": "VPC"}
+      }
+    },
+    "Subnet01NetworkAcl01Association": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "SubnetId": {"Ref": "Subnet01"},
+        "NetworkAclId": {"Ref": "NetworkAcl01"}
       }
     },
     "NetworkAcl01Entry01": {
@@ -157,31 +162,6 @@
         "CidrBlock": "0.0.0.0/0"
       }
     },
-    "Subnet01NetworkAcl01Association": {
-      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
-      "Properties": {
-        "SubnetId": {"Ref": "Subnet01"},
-        "NetworkAclId": {"Ref": "NetworkAcl01"}
-      }
-    },
-
-    "MyServerSecurityGroup": {
-      "Type": "AWS::EC2::SecurityGroup",
-      "Properties": {
-        "GroupDescription": "MyServer Security Group",
-        "GroupName": "MyServer SecurityGroup",
-        "VpcId": {
-          "Ref": "MyVPC"
-        },
-        "SecurityGroupIngress": [{
-          "CidrIp": "0.0.0.0/0",
-          "FromPort": 22,
-          "IpProtocol": "tcp",
-          "ToPort": 22
-        }]
-      }
-    },
-
 
     "MyServer": {
       "Type": "AWS::EC2::Instance",
