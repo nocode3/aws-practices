@@ -2,17 +2,93 @@
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Description": "Create a RDS Instance of MySQL Engine",
 	"Parameters": {
-		"VPC": {
-			"Description": "VPC Id",
-			"Type": "AWS::EC2::VPC::Id"
-		}		       
 	},
 	"Resources": {
+		"VPC": {
+			"Type": "AWS::EC2::VPC",
+			"Properties": {
+				"CidrBlock": "10.0.0.0/16",
+				"EnableDnsHostnames": "true"
+			}
+		},
+		"InternetGateway": {
+			"Type": "AWS::EC2::InternetGateway",
+			"Properties": {}
+		},
+		"VPCGatewayAttachment": {
+			"Type": "AWS::EC2::VPCGatewayAttachment",
+			"Properties": {
+				"VpcId": {"Ref": "VPC"},
+				"InternetGatewayId": {"Ref": "InternetGateway"}
+			}
+		},
+
+
+		"Subnet01": {
+			"Type": "AWS::EC2::Subnet",
+			"Properties": {
+				"VpcId": {"Ref": "VPC"},
+				"AvailabilityZone": {
+					"Fn::Select": ["0", {"Fn::GetAZs": ""}]
+				},
+				"CidrBlock": "10.0.1.0/24"
+			}
+		},
+		"RouteTable01": {
+			"Type": "AWS::EC2::RouteTable",
+			"Properties": {
+				"VpcId": {"Ref": "VPC"}
+			}
+		},
+		"Subnet01RouteTable01Association": {
+			"Type": "AWS::EC2::SubnetRouteTableAssociation",
+			"Properties": {
+				"SubnetId": {"Ref": "Subnet01"},
+				"RouteTableId": {"Ref": "RouteTable01"}
+			}
+		},
+		"RouteTable01Route": {
+			"Type": "AWS::EC2::Route",
+			"Properties": {
+				"RouteTableId": {"Ref": "RouteTable01"},
+				"DestinationCidrBlock": "0.0.0.0/0",
+				"GatewayId": {"Ref": "InternetGateway"}
+			},
+			"DependsOn": "VPCGatewayAttachment"
+		},
+
+
+
+		"Subnet02": {
+			"Type": "AWS::EC2::Subnet",
+			"Properties": {
+				"VpcId": {"Ref": "VPC"},
+				"AvailabilityZone": {
+					"Fn::Select": ["1", {"Fn::GetAZs": ""}]
+				},
+				"CidrBlock": "10.0.2.0/24"
+			}
+		},
+		"RouteTable02": {
+			"Type": "AWS::EC2::RouteTable",
+			"Properties": {
+				"VpcId": {"Ref": "VPC"}
+			}
+		},
+		"Subnet02RouteTable02Association": {
+			"Type": "AWS::EC2::SubnetRouteTableAssociation",
+			"Properties": {
+				"SubnetId": {"Ref": "Subnet02"},
+				"RouteTableId": {"Ref": "RouteTable02"}
+			}
+		},
+
+
 		"DBSubnetGroup": {
 			"Type": "AWS::RDS::DBSubnetGroup",
 			"Properties": {
 				"DBSubnetGroupDescription": "Subnets available for the RDS DB Instance",
-				"SubnetIds": ["subnet-0a28f89647a58f3bb", "subnet-0ec6e1b16ebfffd1f"]
+				"SubnetIds": [{"Ref": "Subnet01"}, {"Ref": "Subnet02"}]
 			}
 		},
 		"DatabaseSecurityGroup": {
