@@ -493,7 +493,7 @@
 			"Type": "AWS::EC2::NetworkAclEntry",
 			"Properties": {
 				"NetworkAclId": {
-					"Ref": "NetworkAcl04"
+					"Ref": "NetworkAcl03"
 				},
 				"RuleNumber": "200",
 				"Protocol": "6",
