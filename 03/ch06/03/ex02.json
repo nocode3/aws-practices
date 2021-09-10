@@ -479,7 +479,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/aws-example-myapp/tarball/rds-impl"
+							"/usr/local/myapp": "https://github.com/kickscar/aws-practices/tree/master/myapp/ex02"
 						},
 						"files": {
 							"/usr/local/myapp/config/app.env": {
