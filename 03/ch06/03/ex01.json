@@ -8,7 +8,7 @@
     "VPC": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
-        "CidrBlock": "172.31.0.0/20",
+        "CidrBlock": "10.0.0.0/16",
         "EnableDnsHostnames": "true"
       }
     },
@@ -63,7 +63,7 @@
           "Ref": "VPC"
         },
         "AvailabilityZone": "ap-northeast-2a",
-        "CidrBlock": "172.30.1.0/24",
+        "CidrBlock": "10.0.1.0/24",
         "MapPublicIpOnLaunch" : true
       }
     },
@@ -195,7 +195,7 @@
           "Ref": "VPC"
         },
         "AvailabilityZone": "ap-northeast-2c",
-        "CidrBlock": "172.30.2.0/24",
+        "CidrBlock": "10.0.2.0/24",
         "MapPublicIpOnLaunch" : true
       }
     },
