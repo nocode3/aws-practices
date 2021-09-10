@@ -8,7 +8,7 @@
     "VPC": {
       "Type": "AWS::EC2::VPC",
       "Properties": {
-        "CidrBlock": "172.30.0.0/16",
+        "CidrBlock": "172.31.0.0/20",
         "EnableDnsHostnames": "true"
       }
     },
