@@ -527,7 +527,7 @@
 					  		}
 						},
 						"sources": {
-							"/usr/local/myapp": "https://github.com/kickscar/aws-example-myapp/tarball/s3-impl"
+							"/usr/local/myapp": "https://github.com/kickscar/myapp-ex03/tarball/main"
 						},
 						"files": {
 							"/usr/local/myapp/config/app.env": {
