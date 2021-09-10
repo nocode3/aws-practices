@@ -213,42 +213,8 @@
 		"NetworkAcl01Entry05": {
 			"Type": "AWS::EC2::NetworkAclEntry",
 			"Properties": {
-				"NetworkAclId": {
-					"Ref": "NetworkAcl01"
-				},
-				"RuleNumber": "500",
-				"Protocol": "6",
-				"PortRange": {
-					"From": "3306",
-					"To": "3306"
-				},
-				"RuleAction": "allow",
-				"Egress": "false",
-				"CidrBlock": "0.0.0.0/0"
-			}
-		},
-		"NetworkAcl01Entry06": {
-			"Type": "AWS::EC2::NetworkAclEntry",
-			"Properties": {
-				"NetworkAclId": {
-					"Ref": "NetworkAcl01"
-				},
-				"RuleNumber": "600",
-				"Protocol": "6",
-				"PortRange": {
-					"From": "1024",
-					"To": "65535"
-				},
-				"RuleAction": "allow",
-				"Egress": "true",
-				"CidrBlock": "0.0.0.0/0"
-			}
-		},
-		"NetworkAcl01Entry07": {
-			"Type": "AWS::EC2::NetworkAclEntry",
-			"Properties": {
 				"NetworkAclId": {"Ref": "NetworkAcl01"},
-				"RuleNumber": "700",
+				"RuleNumber": "500",
 				"Protocol": "6",
 				"PortRange": {
 					"From": "0",
@@ -259,11 +225,11 @@
 				"CidrBlock": "0.0.0.0/0"
 			}
 		},
-		"NetworkAcl01Entry08": {
+		"NetworkAcl01Entry06": {
 			"Type": "AWS::EC2::NetworkAclEntry",
 			"Properties": {
 				"NetworkAclId": {"Ref": "NetworkAcl01"},
-				"RuleNumber": "800",
+				"RuleNumber": "600",
 				"Protocol": "6",
 				"PortRange": {
 					"From": "1024",
@@ -358,6 +324,40 @@
 			}
 		},
 		"NetworkAcl02Entry02": {
+			"Type": "AWS::EC2::NetworkAclEntry",
+			"Properties": {
+				"NetworkAclId": {
+					"Ref": "NetworkAcl02"
+				},
+				"RuleNumber": "200",
+				"Protocol": "6",
+				"PortRange": {
+					"From": "1024",
+					"To": "65535"
+				},
+				"RuleAction": "allow",
+				"Egress": "true",
+				"CidrBlock": "0.0.0.0/0"
+			}
+		},
+		"NetworkAcl02Entry03": {
+			"Type": "AWS::EC2::NetworkAclEntry",
+			"Properties": {
+				"NetworkAclId": {
+					"Ref": "NetworkAcl02"
+				},
+				"RuleNumber": "100",
+				"Protocol": "6",
+				"PortRange": {
+					"From": "0",
+					"To": "65535"
+				},
+				"RuleAction": "allow",
+				"Egress": "true",
+				"CidrBlock": "0.0.0.0/0"
+			}
+		},
+		"NetworkAcl02Entry04": {
 			"Type": "AWS::EC2::NetworkAclEntry",
 			"Properties": {
 				"NetworkAclId": {
@@ -472,14 +472,47 @@
 				"CidrBlock": "0.0.0.0/0"
 			}
 		},
-
+		"NetworkAcl03Entry03": {
+			"Type": "AWS::EC2::NetworkAclEntry",
+			"Properties": {
+				"NetworkAclId": {
+					"Ref": "NetworkAcl03"
+				},
+				"RuleNumber": "100",
+				"Protocol": "6",
+				"PortRange": {
+					"From": "0",
+					"To": "65535"
+				},
+				"RuleAction": "allow",
+				"Egress": "true",
+				"CidrBlock": "0.0.0.0/0"
+			}
+		},
+		"NetworkAcl03Entry04": {
+			"Type": "AWS::EC2::NetworkAclEntry",
+			"Properties": {
+				"NetworkAclId": {
+					"Ref": "NetworkAcl04"
+				},
+				"RuleNumber": "200",
+				"Protocol": "6",
+				"PortRange": {
+					"From": "1024",
+					"To": "65535"
+				},
+				"RuleAction": "allow",
+				"Egress": "true",
+				"CidrBlock": "0.0.0.0/0"
+			}
+		},
 
 
 		"DBSubnetGroup": {
 			"Type": "AWS::RDS::DBSubnetGroup",
 			"Properties": {
 				"DBSubnetGroupDescription": "Subnets available for the RDS DB Instance",
-				"SubnetIds": [{"Ref": "Subnet01"}, {"Ref": "Subnet03"}]
+				"SubnetIds": [{"Ref": "Subnet02"}, {"Ref": "Subnet03"}]
 			}
 		},
 
