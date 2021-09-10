@@ -28,17 +28,17 @@
     "VPCGatewayAttachment": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
       "Properties": {
-        "VpcId": {"Ref": "MyVPC"},
+        "VpcId": {"Ref": "VPC"},
         "InternetGatewayId": {"Ref": "InternetGateway"}
       }
     },
 
 
-    "MyVPCSecurityGroup": {
+    "VPCSecurityGroup": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
-        "GroupDescription": "My VPC Security Group",
-        "GroupName": "MyVPCSecurityGroup",
+        "GroupDescription": "VPC Security Group",
+        "GroupName": "VPCSecurityGroup",
         "VpcId": {
           "Ref": "VPC"
         },
@@ -174,7 +174,7 @@
           "DeleteOnTermination": "true",
           "SubnetId": {"Ref": "Subnet01"},
           "DeviceIndex": "0",
-          "GroupSet": [{"Ref": "MyVPCSecurityGroup"}]
+          "GroupSet": [{"Ref": "VPCSecurityGroup"}]
         }]
       },
       "DependsOn": "VPCGatewayAttachment"
