@@ -8,6 +8,8 @@
 
 ### 04. Web Application Development: 웹 애플리케이션 만들기
 
+# special-spoon
+```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'darkMode': true}, "flowchart" : { "curve" : "basis" } } }%%
 flowchart TD
     DF -->EIP
@@ -39,3 +41,5 @@ flowchart TD
     LOG((Log File))
     end
    
+```
+
